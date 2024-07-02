@@ -1,91 +1,124 @@
 # CustomTerminal-Tmux
 
-[![Watch the video](https://img.youtube.com/vi/7poUgkPtEA8/hqdefault.jpg)](https://www.youtube.com/watch?v=7poUgkPtEA8)
+## What We're Going to Achieve 🚀
+[![Watch the video](Assets/Images/Screenshot_02-Jul_23-10-52_kitty.png)](https://www.youtube.com/watch?v=7poUgkPtEA8)
 
-# Tmux -
-A terminal multiplexer lets you use the terminal as in tile format
-and also creates session that can be changed with prefix and n,p
-n in stand for next , p stand for previous 
+## Tmux - 
+Tmux is a terminal multiplexer that allows you to use the terminal in a tiled format. It also creates sessions that can be switched using prefix commands: `prefix + n` for next and `prefix + p` for previous.
 
-## Installation 
-#### Ubuntu - 
-###### Make sure the repositories are up to date and then install tmux
-```
+## Installation 📦
+
+### Ubuntu
+Make sure the repositories are up to date and then install Tmux:
+```sh
 sudo apt update
 sudo apt install tmux
 ```
-#### MacOs -
-###### step -1 If you don't have home brew installd then install it using
-```
+
+### macOS
+#### Step 1: Install Homebrew (if not already installed)
+```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-###### Step - 2 Install tmux 
-```
+#### Step 2: Install Tmux
+```sh
 brew install tmux
-
 ```
-### Tmux Package Manager
-we willbe using this package manager for our further process 
 
-#### Requirements 
-`Tmux` `git` `bash` or make sure you have this according to your os
+## Tmux Package Manager
+We'll be using TPM (Tmux Plugin Manager) for our configuration process.
 
-#### Clone TPM
-```
+### Requirements
+- `tmux`
+- `git`
+- `bash`
+
+### Clone TPM
+```sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
-#### Dot-file
-we have to create this file using touch or what ever you like 
-```
+
+### Dot-file
+Create a configuration file:
+```sh
 touch ~/.tmux.conf
 
-OR
+# OR
 
 touch $XDG_CONFIG_HOME/tmux/tmux.conf
 ```
-All of our configuration will sit here\
-let's put a example config 
-```
+All of our configurations will go in this file. Let's start with a simple example:
+```sh
 set -g mouse on
 ```
-save it and get back to tmux terminal and run 
-```
+Save the file and then run the following command in the Tmux terminal:
+```sh
 tmux source ~/.config/tmux/tmux.conf
 ```
 
-## Prefix key 
-All of the tmux shortcuts will use this key which is `ctrl + b` , we will be changing it to some other key we will use whatever suits us comfortable
+## Prefix Key
+All Tmux shortcuts use the prefix key `Ctrl + b`. We'll change it to a more comfortable key combination.
 
-## Splitting the term
-These pains are tiled perfectly and also you can adjust their sizes as you like with 
+## Splitting the Terminal 🖥️
+You can tile panes and adjust their sizes using:
+```sh
+Ctrl + b <Arrow Key>
 ```
-ctrl + b Arrow 
-```
-> NOTE you need to keep pressing the prefix key until you get size of your comfort
-#### Horizontal split
-```
-ctrl + b "
-```
-#### Vertical Split
-```
-ctrl + b % 
+> **Note:** Keep pressing the prefix key until you get the desired size.
+
+### Horizontal Split
+```sh
+Ctrl + b "
 ```
 
-> Note: Please use shift key for `"` & `%`
-
-
-## Setting up config
-### TPM 
-Put this in on your `tmux.conf`
+### Vertical Split
+```sh
+Ctrl + b %
 ```
+> **Note:** Use the shift key for `"` and `%`.
+
+## Setting Up Configurations ⚙️
+
+### Changing the Prefix Key
+We'll change the prefix key to `Ctrl + Space`. You can use whatever key combination suits you best:
+```sh
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+```
+
+### TPM Configuration
+Add the following to your `tmux.conf`:
+```sh
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
 run '~/.tmux/plugins/tpm/tpm'
 ```
-> NOTE: This should be in the bottom of your `tmux.conf` file
+> **Note:** This should be at the bottom of your `tmux.conf` file.
 
-Then do the step below to install the `TPM` in your tmux
+Then, install TPM in Tmux:
+```sh
+Ctrl + b + Shift + i
 ```
-ctrl + b + Shift + i
+You should see something like this:
+![image](Assets/Images/Screenshot_02-Jul_22-53-57_kitty.png)
+
+### Theming 🎨
+We'll use the Nord theme. Add this to your `tmux.conf`:
+```sh
+set -g @plugin "arcticicestudio/nord-tmux"
+```
+
+### Navigator
+We'll use `christoomey/vim-tmux-navigator` to boost productivity, as it integrates with Vim and Neovim:
+```sh
+set -g @plugin 'christoomey/vim-tmux-navigator'
+```
+Key bindings:
+```sh
+bind h select-pane -L
+bind j select-pane -D 
+bind k select-pane -U
+bind l select-pane -R
 ```
